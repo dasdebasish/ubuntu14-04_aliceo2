@@ -1,5 +1,6 @@
 # ubuntu14-04_aliceo2
 Documentation on the issues of working with ALICE-O2 code in ubuntu 14.04 LTS version
+
 AFTER DOWNLOADING THE SUITABLE "ALICE-O2" package from github (git clone -b mft https://github.com/packagename/AliceO2.git)
 
 
