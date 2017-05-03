@@ -1,0 +1,149 @@
+THESE ARE THE COMMANDS FOR UBUNTU
+=========================================================
+
+1) FairSoft
+
+git clone -b dev https://github.com/FairRootGroup/FairSoft.git
+
+./configure
+
+at path : /home/debasish/MFT/new_aliceo2/build_fairsoft
+-------------------------------------------------------------------
+2) DDS
+
+git clone https://github.com/FairRootGroup/DDS.git
+cd DDS
+mkdir build_for_alfa
+cd build_for_alfa
+
+/home/debasish/cmake-3.7.2/bin/cmake -C ../BuildSetup.cmake -DCMAKE_INSTALL_PREFIX=/home/debasish/MFT/new_aliceo2/build_fairsoft/DDS -DBOOST_ROOT=/home/debasish/MFT/new_aliceo2/build_fairsoft ..
+
+make wn_bin
+make install
+-------------------------------------------------------------------
+3) FairRoot
+
+git clone -b dev https://github.com/FairRootGroup/FairRoot.git
+cd FairRoot
+cd ../FairRoot/
+export SIMPATH=/home/debasish/MFT/new_aliceo2/build_fairsoft/
+
+/home/debasish/cmake-3.7.2/bin/cmake -DCMAKE_INSTALL_PREFIX=/home/debasish/MFT/new_aliceo2/build_fairsoft/FairRoot -DUSE_DIFFERENT_COMPILER=TRUE ..
+
+Note of these commands :
+-- Looking for Go...
+-- Looking for Go... found Go 1.7
+-- Found Go: /usr/local/go/bin/go (found suitable version "1.7", minimum required is "1.7")
+-- FindGSL: gsl-config not found.
+===========================
+Installing "Go" creates an incomplete installation of FairRoot and could not fullfill all the steps in "make install":
+=====================================
+-- Installing: /home/debasish/MFT/new_aliceo2/build_fairsoft/FairRoot/share/fairbase/examples/MQ/multiple-transports/config/ex-multiple-transports.json
+CMake Error at examples/advanced/GoTutorial/cmake_install.cmake:36 (file):
+  file INSTALL cannot find
+  "/home/debasish/MFT/new_aliceo2/FairRoot/examples/advanced/GoTutorial/bin/go-processor".
+Call Stack (most recent call first):
+  examples/cmake_install.cmake:58 (include)
+  cmake_install.cmake:85 (include)
+
+
+make: *** [install] Error 1
+==============================
+Hence "Go" is un-installed here.
+-------------------------------------------------------------------
+
+source /home/debasish/MFT/new_aliceo2/build_fairsoft/FairRoot/bin/FairRootConfig.sh 
+-------------------------------------------------------------------
+4) git clone https://github.com/VcDevel/Vc Vc
+cd Vc/
+git checkout 1.0
+mkdir build
+cd build
+
+-------------------------------------------------------------------
+5) git clone http://github.com/alisw/AliRoot
+
+/home/debasish/cmake-3.7.2/bin/cmake -DCMAKE_INSTALL_PREFIX=/home/debasish/MFT/new_aliceo2/Vc/Vc-1.0 -DBUILD_TESTING=OFF ..
+
+make
+make install
+
+git checkout master
+
+
+mkdir build_for_alfa
+cd build_for_alfa/
+export ALICE_ROOT=$SIMPATH/AliRoot
+export ALICE_TARGET='root-config --arch'
+export ROOTSYS=$SIMPATH
+
+-------------------------------------------------------------------
+
+/home/debasish/cmake-3.7.2/bin/cmake -DCMAKE_INSTALL_PREFIX=$ALICE_ROOT -DZEROMQ=$SIMPATH -DROOTSYS=$ROOTSYS -DVc_DIR=/home/debasish/MFT/new_aliceo2/Vc/Vc-1.0/lib/cmake/Vc -DCMAKE_CXX_FLAGS=-std=c++11 ..
+
+-------------------
+Errors in Pythia8 and Pythia6 which we get as follows:
+==============================
+=========================================================================================
+debasish@debasish:~/MFT/new_aliceo2/AliceO2/buildo2$ make
+Scanning dependencies of target svnheader
+-- Found Git: /usr/bin/git (found version "1.9.1")
+fatal: No names found, cannot describe anything.
+-- FairRoot Version -  from - Fri Apr 21 19:05:37 2017 +0200
+[  0%] Built target svnheader
+[  0%] Generating G__SimulationDataFormatDict.cxx, G__SimulationDataFormatDict_rdict.pcm, ../../lib/libSimulationDataFormat.rootmap
+Scanning dependencies of target SimulationDataFormat
+[  1%] Building CXX object DataFormats/simulation/CMakeFiles/SimulationDataFormat.dir/src/Stack.cxx.o
+[  1%] Building CXX object DataFormats/simulation/CMakeFiles/SimulationDataFormat.dir/src/MCTrack.cxx.o
+[  1%] Building CXX object DataFormats/simulation/CMakeFiles/SimulationDataFormat.dir/G__SimulationDataFormatDict.cxx.o
+[  1%] Linking CXX shared library ../../lib/libSimulationDataFormat.so
+[  1%] Built target SimulationDataFormat
+[  2%] Generating G__GeneratorsDict.cxx, G__GeneratorsDict_rdict.pcm, ../lib/libGenerators.rootmap
+In file included from <<< cling interactive line includer >>>:2:
+/home/debasish/MFT/new_aliceo2/AliceO2/Generators/include/Generators/Pythia8Generator.h:22:10: fatal error: 'Pythia8/Basics.h'
+      file not found
+#include "Pythia8/Basics.h"          // for RndmEngine
+         ^
+Scanning dependencies of target Generators
+[  2%] Building CXX object Generators/CMakeFiles/Generators.dir/src/Pythia6Generator.cxx.o
+[  2%] Building CXX object Generators/CMakeFiles/Generators.dir/src/Pythia8Generator.cxx.o
+[  2%] Building CXX object Generators/CMakeFiles/Generators.dir/G__GeneratorsDict.cxx.o
+[  2%] Linking CXX shared library ../lib/libGenerators.so
+/usr/bin/ld: cannot find -lpythia6
+collect2: error: ld returned 1 exit status
+make[2]: *** [lib/libGenerators.so] Error 1
+make[1]: *** [Generators/CMakeFiles/Generators.dir/all] Error 2
+make: *** [all] Error 2
+==========================================================================================
+AND HENCE THE COMMANDS BELOW :
+==============================
+------------------
+cd /home/debasish/MFT/new_aliceo2/build_fairsoft/FairRoot/include
+ln -s /home/debasish/MFT/new_aliceo2/build_fairsoft/include/Pythia8 .
+cd /home/debasish/MFT/new_aliceo2/build_fairsoft/lib
+ln -s /home/debasish/MFT/new_aliceo2/build_fairsoft/AliRoot/lib/libpythia6.so .
+==========================================================================================
+
+export FAIRROOTPATH=/home/debasish/MFT/new_aliceo2/build_fairsoft/FairRoot
+export SIMPATH=/home/debasish/MFT/new_aliceo2/build_fairsoft/
+export ALICE_ROOT=$SIMPATH/AliRoot
+export ALICE_TARGET='root-config --arch'
+export ROOTSYS=$SIMPATH
+
+-------------------------------------------------------------------
+
+6) git clone -b mft https://github.com/bovulpes/AliceO2.git
+
+cd AliceO2
+mkdir build_o2
+cd AliceO2/build_o2
+
+/home/debasish/cmake-3.7.2/bin/cmake -DFAIRROOT_INCLUDE_DIR=$FAIRROOTPATH/include -DFAIRROOT_LIBRARY_DIR=$FAIRROOTPATH/lib -DCMAKE_CXX_FLAGS=-std=c++11 -DDOC_INSTALL=ON -DBOOST_ROOT=/home/debasish/MFT/new_aliceo2/build_fairsoft -DVc_DIR=/home/debasish/MFT/new_aliceo2/Vc/Vc-1.0/lib/cmake/Vc -DUSE_DIFFERENT_COMPILER=TRUE ..
+
+Now before running MFT macros
+-------------------------
+source /home/debasish/MFT/new_aliceo2/AliceO2/buildo2/config.sh
+-------------------------------------------------------------------
+
+
+
