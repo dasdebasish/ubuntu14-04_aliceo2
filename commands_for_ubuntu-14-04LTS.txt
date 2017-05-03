@@ -59,11 +59,11 @@ cd Vc/
 git checkout 1.0
 mkdir build
 cd build
-
+/home/debasish/cmake-3.7.2/bin/cmake -DCMAKE_INSTALL_PREFIX=/home/debasish/MFT/new_aliceo2/Vc/Vc-1.0 -DBUILD_TESTING=OFF ..
+make
+make install
 -------------------------------------------------------------------
 5) git clone http://github.com/alisw/AliRoot
-
-/home/debasish/cmake-3.7.2/bin/cmake -DCMAKE_INSTALL_PREFIX=/home/debasish/MFT/new_aliceo2/Vc/Vc-1.0 -DBUILD_TESTING=OFF ..
 
 make
 make install
