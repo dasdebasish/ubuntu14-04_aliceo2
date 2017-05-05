@@ -51,6 +51,11 @@ Call Stack (most recent call first):
 make: *** [install] Error 1
 ==============================
 Hence "Go" is un-installed here.
+
+
+make
+make install
+
 -------------------------------------------------------------------
 
 source /home/debasish/MFT/new_aliceo2/build_fairsoft/FairRoot/bin/FairRootConfig.sh 
