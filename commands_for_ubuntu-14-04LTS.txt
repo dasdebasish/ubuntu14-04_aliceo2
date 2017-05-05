@@ -142,6 +142,8 @@ cd AliceO2/build_o2
 
 /home/debasish/cmake-3.7.2/bin/cmake -DFAIRROOT_INCLUDE_DIR=$FAIRROOTPATH/include -DFAIRROOT_LIBRARY_DIR=$FAIRROOTPATH/lib -DCMAKE_CXX_FLAGS=-std=c++11 -DDOC_INSTALL=ON -DBOOST_ROOT=/home/debasish/MFT/new_aliceo2/build_fairsoft -DVc_DIR=/home/debasish/MFT/new_aliceo2/Vc/Vc-1.0/lib/cmake/Vc -DUSE_DIFFERENT_COMPILER=TRUE ..
 
+make
+
 Now before running MFT macros
 -------------------------
 source /home/debasish/MFT/new_aliceo2/AliceO2/buildo2/config.sh
