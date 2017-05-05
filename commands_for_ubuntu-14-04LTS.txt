@@ -147,6 +147,7 @@ make
 Now before running MFT macros
 -------------------------
 source /home/debasish/MFT/new_aliceo2/AliceO2/buildo2/config.sh
+source /home/debasish/MFT/new_aliceo2/build_fairsoft/DDS/DDS_env.sh
 -------------------------------------------------------------------
 
 
