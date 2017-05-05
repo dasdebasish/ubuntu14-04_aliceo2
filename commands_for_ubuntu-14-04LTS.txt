@@ -25,7 +25,8 @@ make install
 
 git clone -b dev https://github.com/FairRootGroup/FairRoot.git
 cd FairRoot
-cd ../FairRoot/
+mkdir build
+cd build
 export SIMPATH=/home/debasish/MFT/new_aliceo2/build_fairsoft/
 
 /home/debasish/cmake-3.7.2/bin/cmake -DCMAKE_INSTALL_PREFIX=/home/debasish/MFT/new_aliceo2/build_fairsoft/FairRoot -DUSE_DIFFERENT_COMPILER=TRUE ..
