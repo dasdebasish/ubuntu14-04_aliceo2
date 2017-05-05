@@ -71,12 +71,8 @@ make install
 -------------------------------------------------------------------
 5) git clone http://github.com/alisw/AliRoot
 
-make
-make install
-
+cd AliRoot
 git checkout master
-
-
 mkdir build_for_alfa
 cd build_for_alfa/
 export ALICE_ROOT=$SIMPATH/AliRoot
